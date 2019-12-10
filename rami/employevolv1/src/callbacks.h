@@ -88,3 +88,7 @@ on_restoursupparr_clicked              (GtkWidget      *objet,
 void
 on_valider_suppresvol_clicked          (GtkWidget      *objet,
                                         gpointer         user_data);
+
+void
+on_ressuppvol_clicked                  (GtkWidget      *objet,
+                                        gpointer         user_data);

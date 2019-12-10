@@ -25,7 +25,7 @@ enum
 };
 
 
-int ajouter_reservation(Volr r)
+int ajouter_reservationvol(Volr r)
 {
 FILE*f=NULL;
 FILE*f2=NULL;
@@ -88,7 +88,7 @@ return x;
 
 }
 
-void afficher_reservation(GtkWidget *liste)
+void afficher_reservationvol(GtkWidget *liste)
 {
    GtkCellRenderer *renderer; 
 
@@ -196,20 +196,22 @@ store=gtk_list_store_new (COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, 
   g_object_unref (store);
   }
 }
-/*
-int supprimer_vol(char idvol[])
+
+
+void supprimer_volres(char identif[])
 {int b=0;
 FILE*f=NULL;
 FILE*f1=NULL;
-vol v;
-f=fopen("/home/user16/employevolv1/src/vol.txt","r");
-f1=fopen("/home/user16/employevolv1/src/tmp.txt","w");
+Volr r;
+f=fopen("reservation.txt","r");
+f1=fopen("tmp.txt","w");
 
 
-while(fscanf(f,"%s %s %s %s %d %d %d %d %d %d %s \n",v.id_vol,v.depart,v.destination,v.companie,&(v.date_depart->jour),&(v.date_depart->mois),&(v.date_depart->annee),&(v.date_arrivee->jour),&(v.date_arrivee->mois),&(v.date_arrivee->annee),v.prix)!=EOF){
-        if((strcmp(v.id_vol,idvol)!=0))
+while(fscanf(f,"%s %s %s %d %d %d %d %d %d %s %s %d %d\n",r.identifiant,r.id_reservation,r.id_vol,&r.depart.jour,&r.depart.mois,&r.depart.annee,&r.arrivee.jour,&r.arrivee.mois,&r.arrivee.annee,r.vdepart,r.vdestination,&r.personne,&r.montant)!=EOF)
+{
+        if((strcmp(r.identifiant,identif)!=0))
         {
-        fprintf(f1,"%s %s %s %s %d %d %d %d %d %d %s \n",v.id_vol,v.depart,v.destination,v.companie,v.date_depart->jour,v.date_depart->mois,v.date_depart->annee,v.date_arrivee->jour,v.date_arrivee->mois,v.date_arrivee->annee,v.prix);
+        fprintf(f1,"%s %s %s %d %d %d %d %d %d %s %s %d %d\n",r.identifiant,r.id_reservation,r.id_vol,r.depart.jour,r.depart.mois,r.depart.annee,r.arrivee.jour,r.arrivee.mois,r.arrivee.annee,r.vdepart,r.vdestination,r.personne,r.montant);
 b=1;
 }
 
@@ -217,22 +219,33 @@ b=1;
 
 fclose(f);
 fclose(f1);
-remove("/home/user16/employevolv1/src/vol.txt");
-rename("/home/user16/employevolv1/src/tmp.txt","/home/user16/employevolv1/src/vol.txt");
+remove("reservation.txt");
+rename("tmp.txt","reservation.txt");
 
  }
-*/
 
-int remplir_combovolres(Volr tab[])
+
+
+			
+
+int tableau_resvol_disponible(char tab[50][10])
 {
-	int n=0;
-	FILE* f=fopen("/home/user16/employevolv1/src/vol.txt","r");
+	int i,nS=0;
+	FILE* f=fopen("reservation.txt","r");
+	Volr r;
+	
 	if(f!=NULL)
 	{
-		while(fscanf(f,"%s",tab[n].identifiant)!=EOF)
-			{n++;}
-		fclose(f);
+		while(fscanf(f,"%s %s %s %d %d %d %d %d %d %s %s %d %d\n",r.identifiant,r.id_reservation,r.id_vol,&r.depart.jour,&r.depart.mois,&r.depart.annee,&r.arrivee.jour,&r.arrivee.mois,&r.arrivee.annee,r.vdepart,r.vdestination,&r.personne,&r.montant)!=EOF)
+		{
+			
+					
+						strcpy(tab[nS],r.identifiant);
+						nS++;
+					}
+					
 	}
-	return n;
+	fclose(f);
+	return nS;
 }
 

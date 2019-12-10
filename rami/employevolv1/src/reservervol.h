@@ -16,14 +16,16 @@ Date arrivee;
 char vdepart[30];
 char vdestination[30];
 int personne;
+int montant;
 }Volr;
 
 
 
 
-int ajouter_reservation(Volr r);
-void afficher_reservation();
-void supprimer_reservation();
+int ajouter_reservationvol(Volr r);
+void afficher_reservationvol();
+void supprimer_volres(char identif[]);
 void modifier_reservation();
 int chercher_reservoldisp(Volr r);
 int remplir_combovolres(Volr tab[10]);
+int tableau_resvol_disponible(char tab[50][10]);

@@ -260,7 +260,7 @@ volreserver=create_volreserver();
 gtk_widget_destroy(window1);
 gtk_widget_show(volreserver);
 treeview2=lookup_widget(volreserver,"treeview2");
-afficher_reservation(treeview2);
+afficher_reservationvol(treeview2);
 
 }
 
@@ -286,13 +286,24 @@ on_ajouterr_clicked                    (GtkWidget      *objet,
                                         gpointer         user_data)
 {
 GtkWidget *volreserver;
-GtkWidget *ajouterRVOL;
+GtkWidget *ajouterRVOL,*Combobox6;
+int i,n;
+vol tab[10];
 
 volreserver=lookup_widget(objet,"volreserver");
 ajouterRVOL=create_ajouterRVOL();
 gtk_widget_destroy(volreserver);
 gtk_widget_show(ajouterRVOL);
+Combobox6=lookup_widget(ajouterRVOL, "combobox6");
+
+n=remplir_combovol(tab);
+
+for(i=0;i<n;i++)
+gtk_combo_box_append_text (GTK_COMBO_BOX (Combobox6),_(tab[i].id_vol));
+
 }
+
+
 void
 on_ajouterresvol_clicked                (GtkWidget      *objet,
                                         gpointer         user_data)
@@ -303,7 +314,7 @@ int x;
 GtkWidget *input1, *input2,*input3,*input4,*input5,*input6,*input7,*input8,*input9,*input10,*input11,*input12,*msg;
 GtkWidget *ajoutervol;
 ajoutervol=lookup_widget(objet,"ajoutervol");                                                 
-input1=lookup_widget(objet ,"entry11");
+input1=
 input2=lookup_widget(objet ,"entry12");
 input3=lookup_widget(objet ,"entry13");
 input4=lookup_widget(objet ,"spinbutton13");
@@ -331,7 +342,7 @@ strcpy(r.vdepart,gtk_entry_get_text(GTK_ENTRY(input10)));
 strcpy(r.vdestination,gtk_entry_get_text(GTK_ENTRY(input11)));
 r.personne=gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (input12));
 
-x=ajouter_reservation(r);
+x=ajouter_reservationvol(r);
 
 if(x=1)
 {gtk_label_set_text(GTK_LABEL(msg),"reservation reussie :) ");}
@@ -370,24 +381,23 @@ on_modifierr_clicked                   (GtkWidget      *objet,
 void
 on_supprimerr_clicked                  (GtkWidget      *objet,
                                         gpointer         user_data)
-{GtkWidget *Combobox5;
+{
+GtkWidget *Combobox5;
 GtkWidget *supprimerres;
 GtkWidget *volreserver;
-Volr tab[10];
-int i,n;
+char tab[50][10];
+int n,i;
+
 
 volreserver=lookup_widget(objet,"volreserver");
 supprimerres=create_supprimerres();
-gtk_widget_destroy(volreserver);
 gtk_widget_show(supprimerres);
-
 Combobox5=lookup_widget(supprimerres, "combobox5");
 
-n=remplir_combovolres(tab);
+n=tableau_resvol_disponible(tab);
 
 for(i=0;i<n;i++)
-gtk_combo_box_append_text (GTK_COMBO_BOX (Combobox5),_(tab[i].id_vol));
-
+gtk_combo_box_append_text (GTK_COMBO_BOX (Combobox5),_(tab[i]));
 
 
 }
@@ -397,6 +407,7 @@ void
 on_valider_suppresvol_clicked          (GtkWidget      *objet,
                                         gpointer         user_data)
 {
+
 
 }
 
@@ -422,7 +433,7 @@ volreserver=create_volreserver();
 gtk_widget_destroy(gestionvols);
 gtk_widget_show(volreserver);
 treeview2=lookup_widget(volreserver,"treeview2");
-afficher_reservation(treeview2);
+afficher_reservationvol(treeview2);
 
 }
 
@@ -442,4 +453,23 @@ on_restoursupparr_clicked              (GtkWidget      *objet,
 
 }
 
+
+
+void
+on_ressuppvol_clicked                  (GtkWidget      *objet,
+                                        gpointer         user_data)
+{
+GtkWidget *Combobox5,*label060;
+GtkWidget *Supprimervol;
+char identif[10];
+GtkWidget *msgr;
+int i;
+Combobox5=lookup_widget(objet, "combobox5");
+msgr=lookup_widget(objet,"label060");
+
+strcpy(identif,gtk_combo_box_get_active_text(GTK_COMBO_BOX(Combobox5)));
+supprimer_volres(identif);
+
+gtk_label_set_text(GTK_LABEL(msgr),"Suppression Réussie !");
+}
 

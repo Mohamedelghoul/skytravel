@@ -71,11 +71,6 @@ create_gestionvols (void)
   GtkWidget *hbox5;
   GtkWidget *image8;
   GtkWidget *label50;
-  GtkWidget *supprimer;
-  GtkWidget *alignment6;
-  GtkWidget *hbox6;
-  GtkWidget *image9;
-  GtkWidget *label51;
   GtkWidget *ajouter;
   GtkWidget *alignment4;
   GtkWidget *hbox4;
@@ -88,6 +83,11 @@ create_gestionvols (void)
   GtkWidget *label64;
   GtkWidget *actualiservol;
   GtkWidget *image20;
+  GtkWidget *supprimer;
+  GtkWidget *alignment6;
+  GtkWidget *hbox6;
+  GtkWidget *image9;
+  GtkWidget *label51;
 
   gestionvols = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (gestionvols), _("Gestion de vol"));
@@ -131,27 +131,6 @@ create_gestionvols (void)
   label50 = gtk_label_new_with_mnemonic (_("modifier"));
   gtk_widget_show (label50);
   gtk_box_pack_start (GTK_BOX (hbox5), label50, FALSE, FALSE, 0);
-
-  supprimer = gtk_button_new ();
-  gtk_widget_show (supprimer);
-  gtk_fixed_put (GTK_FIXED (fixed2), supprimer, 392, 448);
-  gtk_widget_set_size_request (supprimer, 112, 32);
-
-  alignment6 = gtk_alignment_new (0.5, 0.5, 0, 0);
-  gtk_widget_show (alignment6);
-  gtk_container_add (GTK_CONTAINER (supprimer), alignment6);
-
-  hbox6 = gtk_hbox_new (FALSE, 2);
-  gtk_widget_show (hbox6);
-  gtk_container_add (GTK_CONTAINER (alignment6), hbox6);
-
-  image9 = gtk_image_new_from_stock ("gtk-delete", GTK_ICON_SIZE_BUTTON);
-  gtk_widget_show (image9);
-  gtk_box_pack_start (GTK_BOX (hbox6), image9, FALSE, FALSE, 0);
-
-  label51 = gtk_label_new_with_mnemonic (_("supprimer"));
-  gtk_widget_show (label51);
-  gtk_box_pack_start (GTK_BOX (hbox6), label51, FALSE, FALSE, 0);
 
   ajouter = gtk_button_new ();
   gtk_widget_show (ajouter);
@@ -204,14 +183,32 @@ create_gestionvols (void)
   gtk_widget_show (image20);
   gtk_container_add (GTK_CONTAINER (actualiservol), image20);
 
+  supprimer = gtk_button_new ();
+  gtk_widget_show (supprimer);
+  gtk_fixed_put (GTK_FIXED (fixed2), supprimer, 392, 448);
+  gtk_widget_set_size_request (supprimer, 112, 32);
+
+  alignment6 = gtk_alignment_new (0.5, 0.5, 0, 0);
+  gtk_widget_show (alignment6);
+  gtk_container_add (GTK_CONTAINER (supprimer), alignment6);
+
+  hbox6 = gtk_hbox_new (FALSE, 2);
+  gtk_widget_show (hbox6);
+  gtk_container_add (GTK_CONTAINER (alignment6), hbox6);
+
+  image9 = gtk_image_new_from_stock ("gtk-delete", GTK_ICON_SIZE_BUTTON);
+  gtk_widget_show (image9);
+  gtk_box_pack_start (GTK_BOX (hbox6), image9, FALSE, FALSE, 0);
+
+  label51 = gtk_label_new_with_mnemonic (_("supprimer"));
+  gtk_widget_show (label51);
+  gtk_box_pack_start (GTK_BOX (hbox6), label51, FALSE, FALSE, 0);
+
   g_signal_connect ((gpointer) retour, "clicked",
                     G_CALLBACK (on_retour_clicked),
                     NULL);
   g_signal_connect ((gpointer) modifier, "clicked",
                     G_CALLBACK (on_modifier_clicked),
-                    NULL);
-  g_signal_connect ((gpointer) supprimer, "clicked",
-                    G_CALLBACK (on_supprimer_clicked),
                     NULL);
   g_signal_connect ((gpointer) ajouter, "clicked",
                     G_CALLBACK (on_ajouter_clicked),
@@ -221,6 +218,9 @@ create_gestionvols (void)
                     NULL);
   g_signal_connect ((gpointer) actualiservol, "clicked",
                     G_CALLBACK (on_actualiservol_clicked),
+                    NULL);
+  g_signal_connect ((gpointer) supprimer, "clicked",
+                    G_CALLBACK (on_supprimer_clicked),
                     NULL);
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
@@ -234,11 +234,6 @@ create_gestionvols (void)
   GLADE_HOOKUP_OBJECT (gestionvols, hbox5, "hbox5");
   GLADE_HOOKUP_OBJECT (gestionvols, image8, "image8");
   GLADE_HOOKUP_OBJECT (gestionvols, label50, "label50");
-  GLADE_HOOKUP_OBJECT (gestionvols, supprimer, "supprimer");
-  GLADE_HOOKUP_OBJECT (gestionvols, alignment6, "alignment6");
-  GLADE_HOOKUP_OBJECT (gestionvols, hbox6, "hbox6");
-  GLADE_HOOKUP_OBJECT (gestionvols, image9, "image9");
-  GLADE_HOOKUP_OBJECT (gestionvols, label51, "label51");
   GLADE_HOOKUP_OBJECT (gestionvols, ajouter, "ajouter");
   GLADE_HOOKUP_OBJECT (gestionvols, alignment4, "alignment4");
   GLADE_HOOKUP_OBJECT (gestionvols, hbox4, "hbox4");
@@ -251,6 +246,11 @@ create_gestionvols (void)
   GLADE_HOOKUP_OBJECT (gestionvols, label64, "label64");
   GLADE_HOOKUP_OBJECT (gestionvols, actualiservol, "actualiservol");
   GLADE_HOOKUP_OBJECT (gestionvols, image20, "image20");
+  GLADE_HOOKUP_OBJECT (gestionvols, supprimer, "supprimer");
+  GLADE_HOOKUP_OBJECT (gestionvols, alignment6, "alignment6");
+  GLADE_HOOKUP_OBJECT (gestionvols, hbox6, "hbox6");
+  GLADE_HOOKUP_OBJECT (gestionvols, image9, "image9");
+  GLADE_HOOKUP_OBJECT (gestionvols, label51, "label51");
 
   return gestionvols;
 }
@@ -1093,14 +1093,14 @@ create_ajouterRVOL (void)
   GtkWidget *hbox3;
   GtkWidget *image5;
   GtkWidget *label38;
+  GtkWidget *label61;
+  GtkWidget *label37;
+  GtkWidget *label620montant;
   GtkWidget *ajouterresvol;
   GtkWidget *alignment14;
   GtkWidget *hbox14;
   GtkWidget *image17;
   GtkWidget *label60;
-  GtkWidget *label61;
-  GtkWidget *label620montant;
-  GtkWidget *label37;
 
   ajouterRVOL = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title (GTK_WINDOW (ajouterRVOL), _("Ajouter reservation vol"));
@@ -1254,6 +1254,21 @@ create_ajouterRVOL (void)
   gtk_widget_show (label38);
   gtk_box_pack_start (GTK_BOX (hbox3), label38, FALSE, FALSE, 0);
 
+  label61 = gtk_label_new (_("Le montant :"));
+  gtk_widget_show (label61);
+  gtk_fixed_put (GTK_FIXED (fixed8), label61, 56, 552);
+  gtk_widget_set_size_request (label61, 120, 24);
+
+  label37 = gtk_label_new ("");
+  gtk_widget_show (label37);
+  gtk_fixed_put (GTK_FIXED (fixed8), label37, 184, 624);
+  gtk_widget_set_size_request (label37, 169, 57);
+
+  label620montant = gtk_label_new (_(" "));
+  gtk_widget_show (label620montant);
+  gtk_fixed_put (GTK_FIXED (fixed8), label620montant, 160, 544);
+  gtk_widget_set_size_request (label620montant, 121, 41);
+
   ajouterresvol = gtk_button_new ();
   gtk_widget_show (ajouterresvol);
   gtk_fixed_put (GTK_FIXED (fixed8), ajouterresvol, 320, 552);
@@ -1274,21 +1289,6 @@ create_ajouterRVOL (void)
   label60 = gtk_label_new_with_mnemonic (_("ajouter"));
   gtk_widget_show (label60);
   gtk_box_pack_start (GTK_BOX (hbox14), label60, FALSE, FALSE, 0);
-
-  label61 = gtk_label_new (_("Le montant :"));
-  gtk_widget_show (label61);
-  gtk_fixed_put (GTK_FIXED (fixed8), label61, 56, 552);
-  gtk_widget_set_size_request (label61, 120, 24);
-
-  label620montant = gtk_label_new (_(" "));
-  gtk_widget_show (label620montant);
-  gtk_fixed_put (GTK_FIXED (fixed8), label620montant, 160, 544);
-  gtk_widget_set_size_request (label620montant, 121, 41);
-
-  label37 = gtk_label_new ("");
-  gtk_widget_show (label37);
-  gtk_fixed_put (GTK_FIXED (fixed8), label37, 184, 624);
-  gtk_widget_set_size_request (label37, 169, 57);
 
   g_signal_connect ((gpointer) retourr1, "clicked",
                     G_CALLBACK (on_retourr1_clicked),
@@ -1326,14 +1326,14 @@ create_ajouterRVOL (void)
   GLADE_HOOKUP_OBJECT (ajouterRVOL, hbox3, "hbox3");
   GLADE_HOOKUP_OBJECT (ajouterRVOL, image5, "image5");
   GLADE_HOOKUP_OBJECT (ajouterRVOL, label38, "label38");
+  GLADE_HOOKUP_OBJECT (ajouterRVOL, label61, "label61");
+  GLADE_HOOKUP_OBJECT (ajouterRVOL, label37, "label37");
+  GLADE_HOOKUP_OBJECT (ajouterRVOL, label620montant, "label620montant");
   GLADE_HOOKUP_OBJECT (ajouterRVOL, ajouterresvol, "ajouterresvol");
   GLADE_HOOKUP_OBJECT (ajouterRVOL, alignment14, "alignment14");
   GLADE_HOOKUP_OBJECT (ajouterRVOL, hbox14, "hbox14");
   GLADE_HOOKUP_OBJECT (ajouterRVOL, image17, "image17");
   GLADE_HOOKUP_OBJECT (ajouterRVOL, label60, "label60");
-  GLADE_HOOKUP_OBJECT (ajouterRVOL, label61, "label61");
-  GLADE_HOOKUP_OBJECT (ajouterRVOL, label620montant, "label620montant");
-  GLADE_HOOKUP_OBJECT (ajouterRVOL, label37, "label37");
 
   return ajouterRVOL;
 }
@@ -1541,7 +1541,8 @@ create_supprimerres (void)
   GtkWidget *label48;
   GtkWidget *restoursupparr;
   GtkWidget *image6;
-  GtkWidget *button4;
+  GtkWidget *label060;
+  GtkWidget *ressuppvol;
   GtkWidget *alignment15;
   GtkWidget *hbox15;
   GtkWidget *image18;
@@ -1556,8 +1557,8 @@ create_supprimerres (void)
 
   combobox5 = gtk_combo_box_new_text ();
   gtk_widget_show (combobox5);
-  gtk_fixed_put (GTK_FIXED (fixed10), combobox5, 216, 200);
-  gtk_widget_set_size_request (combobox5, 33, 31);
+  gtk_fixed_put (GTK_FIXED (fixed10), combobox5, 192, 152);
+  gtk_widget_set_size_request (combobox5, 224, 104);
 
   label48 = gtk_label_new (_("Selectionnner Identifiant :"));
   gtk_widget_show (label48);
@@ -1573,14 +1574,19 @@ create_supprimerres (void)
   gtk_widget_show (image6);
   gtk_container_add (GTK_CONTAINER (restoursupparr), image6);
 
-  button4 = gtk_button_new ();
-  gtk_widget_show (button4);
-  gtk_fixed_put (GTK_FIXED (fixed10), button4, 256, 264);
-  gtk_widget_set_size_request (button4, 88, 32);
+  label060 = gtk_label_new ("");
+  gtk_widget_show (label060);
+  gtk_fixed_put (GTK_FIXED (fixed10), label060, 208, 304);
+  gtk_widget_set_size_request (label060, 184, 64);
+
+  ressuppvol = gtk_button_new ();
+  gtk_widget_show (ressuppvol);
+  gtk_fixed_put (GTK_FIXED (fixed10), ressuppvol, 256, 264);
+  gtk_widget_set_size_request (ressuppvol, 88, 32);
 
   alignment15 = gtk_alignment_new (0.5, 0.5, 0, 0);
   gtk_widget_show (alignment15);
-  gtk_container_add (GTK_CONTAINER (button4), alignment15);
+  gtk_container_add (GTK_CONTAINER (ressuppvol), alignment15);
 
   hbox15 = gtk_hbox_new (FALSE, 2);
   gtk_widget_show (hbox15);
@@ -1594,6 +1600,10 @@ create_supprimerres (void)
   gtk_widget_show (label63);
   gtk_box_pack_start (GTK_BOX (hbox15), label63, FALSE, FALSE, 0);
 
+  g_signal_connect ((gpointer) ressuppvol, "clicked",
+                    G_CALLBACK (on_ressuppvol_clicked),
+                    NULL);
+
   /* Store pointers to all widgets, for use by lookup_widget(). */
   GLADE_HOOKUP_OBJECT_NO_REF (supprimerres, supprimerres, "supprimerres");
   GLADE_HOOKUP_OBJECT (supprimerres, fixed10, "fixed10");
@@ -1601,7 +1611,8 @@ create_supprimerres (void)
   GLADE_HOOKUP_OBJECT (supprimerres, label48, "label48");
   GLADE_HOOKUP_OBJECT (supprimerres, restoursupparr, "restoursupparr");
   GLADE_HOOKUP_OBJECT (supprimerres, image6, "image6");
-  GLADE_HOOKUP_OBJECT (supprimerres, button4, "button4");
+  GLADE_HOOKUP_OBJECT (supprimerres, label060, "label060");
+  GLADE_HOOKUP_OBJECT (supprimerres, ressuppvol, "ressuppvol");
   GLADE_HOOKUP_OBJECT (supprimerres, alignment15, "alignment15");
   GLADE_HOOKUP_OBJECT (supprimerres, hbox15, "hbox15");
   GLADE_HOOKUP_OBJECT (supprimerres, image18, "image18");
