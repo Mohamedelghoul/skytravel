@@ -40,6 +40,9 @@ main (int argc, char *argv[])
   GtkWidget *confirmation_modifier_client_employee;
   GtkWidget *supprimer_client_employee;
   GtkWidget *confirmation_supprimer_client_employee;
+  GtkWidget *choisir_identifiant_modifier_employee;
+  GtkWidget *choisir_identifiant_modifier_client_employee;
+  GtkWidget *choisir_identifiant_modifier_client_admin;
 
 #ifdef ENABLE_NLS
   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
@@ -59,7 +62,7 @@ main (int argc, char *argv[])
    */
   authentification_utilisateur = create_authentification_utilisateur ();
   gtk_widget_show (authentification_utilisateur);
-
+  
 
   gtk_main ();
   return 0;

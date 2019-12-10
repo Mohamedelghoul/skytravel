@@ -27,3 +27,6 @@ GtkWidget* create_modifier_client_employee (void);
 GtkWidget* create_confirmation_modifier_client_employee (void);
 GtkWidget* create_supprimer_client_employee (void);
 GtkWidget* create_confirmation_supprimer_client_employee (void);
+GtkWidget* create_choisir_identifiant_modifier_employee (void);
+GtkWidget* create_choisir_identifiant_modifier_client_employee (void);
+GtkWidget* create_choisir_identifiant_modifier_client_admin (void);
