@@ -1,0 +1,7 @@
+D5846 NF4949 E5 02/01/2020 02/01/2020 Tunis HotelTuniis 1 1 1 Complete 9211 
+D7978 D98798 E5 01/01/2020 10/01/2020 Tunis HotelTuniis 3 1 1 Complete 934 
+789794 E4988 ﻿E01 02/01/2020 05/01/2020 Sousse SoussaPalace 1 1 2 Complete 174 
+ERT48 E79879 D99 02/01/2020 12/01/2020 Tunis TunisCity 1 1 1 Complete 237 
+59  D99 03/01/2020 04/01/2020 Tunis TunisCity 1 1 1 Demi-Prension 82 
+J899 987 E5 02/01/2020 03/01/2020 Tunis HotelTuniis 1 1 1 Complete 66483 
+C798 R79879 D77 03/01/2020 06/01/2020 Hammamet Roussinior 1 0 1 Complete 90 
