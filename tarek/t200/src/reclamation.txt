@@ -1,0 +1,4 @@
+101 15487 154 12 12 2019 non_lu t101.txt r101.txt 
+100 45874 199 12 10 2019 non_lu t100.txt r100.txt 
+102 client Excursion 12 12 2019 non_lu t102.txt r102.txt 
+103 client Heberegement 12 12 2019 non_lu t103.txt r103.txt 
