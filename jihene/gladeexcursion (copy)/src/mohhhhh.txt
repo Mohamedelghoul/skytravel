@@ -1,0 +1,68 @@
+void
+on_villesexcursione_clicked            (GtkWidget       *objet,
+                                        gpointer         user_data)
+{GtkWidget *departexcursione, *arriveeexcursione, *paysexcursione;//,*idexcursiongeneree;
+char pays[50];
+ int n,i,p;
+ char tab[50][20];
+char code[50];
+
+	paysexcursione=lookup_widget(objet,"paysexcursione");
+	strcpy(pays,gtk_combo_box_get_active_text(GTK_COMBO_BOX(paysexcursione)));
+	p=nombre_ville(pays);
+	n=choix_villes(p,tab);
+	departexcursione=lookup_widget(objet,"departexcursione");
+	arriveeexcursione=lookup_widget(objet,"arriveeexcursione");
+	for (i=0; i<n;i++)
+		{gtk_combo_box_append_text (GTK_COMBO_BOX (departexcursione),_(tab[i]));
+		gtk_combo_box_append_text (GTK_COMBO_BOX (arriveeexcursione),_(tab[i]));}
+
+
+
+
+
+
+
+  int nombre_ville(char pays[])
+	{
+	int var=0;
+
+	if (strcmp(pays,"Allemagne ")==0)
+		var=1;
+	if (strcmp(pays,"France ")==0)
+		var=2;
+	if (strcmp(pays,"Turquie")==0)
+		var=3;
+	if (strcmp(pays,"Tunisie")==0)
+		var=4;
+	if (strcmp(pays,"Suisse")==0)
+		var=5;
+	if (strcmp(pays,"Espagne")==0)
+		var=6;
+	if (strcmp(pays,"Italie")==0)
+		var=7;
+	if (strcmp(pays,"Maroc")==0)
+		var=8;
+	return var;
+	}
+
+   
+   int choix_villes(int n, char tab[50][20])
+	{ int nb,i=0,k; char ville[20];
+	  FILE* f=fopen("/home/jihene/Desktop/gladeexcursion/src/villes.txt","r");
+	    if (f!=NULL)
+            {
+		while (fscanf(f,"%d %s \n",&nb,ville)!=EOF)
+		   {	 
+			if (nb==n) 
+			{
+				strcpy(tab[i],ville);
+				i++;k++;
+			}
+		   }	
+	
+           }
+			
+	return k;
+
+	}

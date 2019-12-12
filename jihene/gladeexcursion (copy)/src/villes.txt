@@ -1,0 +1,17 @@
+1 Berlin
+1 frankfort
+2 Paris
+2 Nice
+3 Istanbul
+3 bursa
+4 Tunis
+4 Hammamet
+4 Sousse
+5 Neuchatel
+5 genève
+6 Madrid
+6 Barcelone
+7 Rome
+7 Milan
+8 Casablanca 
+8 Rabat

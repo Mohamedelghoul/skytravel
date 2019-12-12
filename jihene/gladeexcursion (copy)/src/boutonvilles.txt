@@ -1,0 +1,63 @@
+
+
+
+   int nombre_ville(char pays)
+	{
+	int var=0;
+
+	if (pays=="Allemagne")
+		var=1;
+	if (pays=="france")
+		var=2;
+	if (pays=="Turquie")
+		var=3;
+	if (pays=="Tunisie")
+		var=4;
+	if (pays=="Suisse")
+		var=5;
+	if (pays=="Espagne")
+		var=6;
+	if (pays=="Italie")
+		var=7;
+	if (pays=="Maroc")
+		var=8;
+	return var;
+	}
+
+   
+   int choix_villes(int n, char tab[])
+	{ int nb,i=0; char ville;
+	  FILE* f=fopen("villes.txt","r");
+	    if (f!=NULL)
+            {
+		while (!feof(f))
+		   {	
+			fscanf(f, "%d %s",&nb,ville); 
+			if (nb==n) 
+			{
+				strcpy(tab[i],ville);
+				i++;
+			}
+		   }	
+	fclose(f)
+           }			
+	return i;
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
