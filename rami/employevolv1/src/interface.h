@@ -12,3 +12,5 @@ GtkWidget* create_modifiervol22 (void);
 GtkWidget* create_ajouterRVOL (void);
 GtkWidget* create_modifierres (void);
 GtkWidget* create_supprimerres (void);
+GtkWidget* create_clientres (void);
+GtkWidget* create__ (void);
