@@ -1,0 +1,9 @@
+D5846 NF4949 E5 02/01/2020 02/01/2020 Tunis HotelTuniis 1 1 1 Complete 9211 
+D7978 D98798 E5 01/01/2020 10/01/2020 Tunis HotelTuniis 3 1 1 Complete 934 
+789794 E4988 ﻿E01 02/01/2020 05/01/2020 Sousse SoussaPalace 1 1 2 Complete 174 
+ERT48 E79879 D99 02/01/2020 12/01/2020 Tunis TunisCity 1 1 1 Complete 237 
+D7987 H766 E5 03/01/2020 06/01/2020 Tunis HotelTuniis 1 0 1 Complete 89 
+D7987 H984 D79 04/01/2020 06/01/2020 London LondonTye 1 1 1 Complete 297 
+D7987 H981 E5 01/01/2020 01/01/2020 Tunis HotelTuniis 1 0 1 Complete 1424 
+D798784 D98989 ﻿E01 01/01/2020 06/01/2020 Lybie lalala 1 3 2 Complete 1231 
+client H396 ﻿E01 01/01/2020 04/01/2020 Lybie lalala 1 1 1 Demi_Pension 311 
