@@ -1,0 +1,11 @@
+int remplir_combo_reclamation(reclamation tab[50][50])
+{
+	int n=0;
+	FILE* f=fopen("/home/tarek/Desktop/t200/src/reclamation.txt","r");
+	if(f!=NULL)
+	{
+		while(fscanf(f,"%s %s %s %d %d %d %s %s %s \n",tab[n].id_rec,tab[n].id_client,tab[n].type,&(tab[n].date.jour),&(tab[n].date.mois),&(tab[n].date.annee),tab[n].etat,tab[n].text,tab[n].reponse)!=EOF)
+	{n++;}
+	fclose(f);}
+	return n;
+}
