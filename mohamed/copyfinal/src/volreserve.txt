@@ -1,0 +1,7 @@
+void payer(Devis D)
+{
+	int id;
+	D.id=calculer(D);
+	ajouter_facture(D);
+	supprimer(id,D);	
+}
