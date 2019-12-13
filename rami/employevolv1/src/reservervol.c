@@ -25,7 +25,7 @@ enum
 };
 
 
-int ajouter_reservationvol(Volr r)
+void ajouter_reservationvol(Volr r)
 {
 FILE*f=NULL;
 FILE*f2=NULL;
@@ -34,18 +34,18 @@ int dateDEPARTjour,dateDEPARTmois,dateDEPARTannee,dateARIVEEjour,dateARIVEEmois,
 char id_vol[10],depart[10],destination[10],companie[10];
 int montant,b;
 vol v;
-f=fopen("reservation.txt","a+");
+f=fopen("reservervol.txt","a+");
 f2=fopen("vol.txt","r");
  
 b=r.personne;
-while(fscanf(f2,"%s %s %s %s %d %d %d %d %d %d %d \n",id_vol,depart,destination,companie,&dateDEPARTjour,&dateDEPARTmois,&dateDEPARTannee,&dateARIVEEjour,&dateARIVEEmois,&dateARIVEEannee,&prix)!=EOF)
+while(fscanf(f2,"%s %s %s %s %d %d %d %d %d %d %d\n",id_vol,depart,destination,companie,&dateDEPARTjour,&dateDEPARTmois,&dateDEPARTannee,&dateARIVEEjour,&dateARIVEEmois,&dateARIVEEannee,&prix)!=EOF)
 { 
-        if((strcmp(id_vol,r.id_vol)==0) && (strcmp(destination,r.vdestination)==0) )
+        if(strcmp(id_vol,r.id_vol)==0)
         {
-             fprintf(f,"%s %s %s %d %d %d %d %d %d %s %s %d %d\n",r.identifiant,r.id_reservation,r.id_vol,r.depart.jour,r.depart.mois,r.depart.annee,r.arrivee.jour,r.arrivee.mois,r.arrivee.annee,r.vdepart,r.vdestination,r.personne,prix*b);
-  b=1;
+             fprintf(f,"%s %s %s %d %d %d %d %d %d %s %s %d %d\n",r.identifiant,r.id_reservation,r.id_vol,r.depart.jour,r.depart.mois,r.depart.annee,r.arrivee.jour,r.arrivee.mois,r.arrivee.annee,depart,destination,r.personne,prix*b);
+  
           }
-else b=0;
+
 }
 fclose(f);
 
@@ -132,13 +132,7 @@ void afficher_reservationvol(GtkWidget *liste)
       gtk_tree_view_append_column (GTK_TREE_VIEW (liste), column);
 
 
-renderer = gtk_cell_renderer_text_new ();
-column = gtk_tree_view_column_new_with_attributes(" depart", renderer, "text",DEPART, NULL); 
-gtk_tree_view_append_column (GTK_TREE_VIEW (liste), column);
 
-renderer = gtk_cell_renderer_text_new ();
-column = gtk_tree_view_column_new_with_attributes(" destination", renderer, "text",DESTINATION, NULL); 
-gtk_tree_view_append_column (GTK_TREE_VIEW (liste), column);
 
 renderer = gtk_cell_renderer_text_new ();
 column = gtk_tree_view_column_new_with_attributes(" jourDepart", renderer, "text",JOURDepart, NULL); 
@@ -164,6 +158,14 @@ gtk_tree_view_append_column (GTK_TREE_VIEW (liste), column);
 renderer = gtk_cell_renderer_text_new ();
 column = gtk_tree_view_column_new_with_attributes(" anneeArriver", renderer, "text",ANNEEArriver, NULL); 
 gtk_tree_view_append_column (GTK_TREE_VIEW (liste), column);
+  
+renderer = gtk_cell_renderer_text_new ();
+column = gtk_tree_view_column_new_with_attributes(" depart", renderer, "text",DEPART, NULL); 
+gtk_tree_view_append_column (GTK_TREE_VIEW (liste), column);
+
+renderer = gtk_cell_renderer_text_new ();
+column = gtk_tree_view_column_new_with_attributes(" destination", renderer, "text",DESTINATION, NULL); 
+gtk_tree_view_append_column (GTK_TREE_VIEW (liste), column);
 
 renderer = gtk_cell_renderer_text_new ();
 column = gtk_tree_view_column_new_with_attributes(" personne", renderer, "text",Personne, NULL); 
@@ -175,7 +177,7 @@ gtk_tree_view_append_column (GTK_TREE_VIEW (liste), column);
 
 store=gtk_list_store_new (COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
-  f = fopen("reservation.txt", "r"); 
+  f = fopen("reservervol.txt", "r"); 
 
   if(f==NULL)
   {
@@ -183,13 +185,13 @@ store=gtk_list_store_new (COLUMNS, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, 
   }
   else
 
-  { f = fopen("reservation.txt", "a+");
+  { f = fopen("reservervol.txt", "a+");
 
-       while((fscanf(f,"%s %s %s %s %s %s %s %s %s %s %s %s %s ",identif,idres,idvol,depart,destination,jourDepart,moisDepart,anneeDepart,jourArriver,moisArriver,anneeArriver,personne,montant)!= EOF))
+       while((fscanf(f,"%s %s %s %s %s %s %s %s %s %s %s %s %s ",identif,idres,idvol,jourDepart,moisDepart,anneeDepart,jourArriver,moisArriver,anneeArriver,depart,destination,personne,montant)!= EOF))
     {
   gtk_list_store_append (store, &iter);
 
-  gtk_list_store_set (store, &iter, Identif,identif, Idres,idres, Idvol,idvol, DEPART, depart, DESTINATION, destination, JOURDepart, jourDepart, MOISDepart, moisDepart, ANNEEDepart, anneeDepart, JOURArriver, jourArriver, MOISArriver, moisArriver, ANNEEArriver, anneeArriver, Personne, personne, Montant, montant, -1);
+  gtk_list_store_set (store, &iter,Identif,identif,Idres,idres,Idvol,idvol,JOURDepart,jourDepart,MOISDepart,moisDepart,ANNEEDepart,anneeDepart, JOURArriver,jourArriver,MOISArriver,moisArriver,ANNEEArriver,anneeArriver,DEPART,depart,DESTINATION,destination,Personne,personne, Montant,montant, -1);
     }
     fclose(f);
   gtk_tree_view_set_model (GTK_TREE_VIEW (liste), GTK_TREE_MODEL (store)); 
@@ -203,7 +205,7 @@ void supprimer_volres(char identif[])
 FILE*f=NULL;
 FILE*f1=NULL;
 Volr r;
-f=fopen("reservation.txt","r");
+f=fopen("reservervol.txt","r");
 f1=fopen("tmp.txt","w");
 
 
@@ -219,8 +221,8 @@ b=1;
 
 fclose(f);
 fclose(f1);
-remove("reservation.txt");
-rename("tmp.txt","reservation.txt");
+remove("reservervol.txt");
+rename("tmp.txt","reservervol.txt");
 
  }
 
@@ -231,7 +233,7 @@ rename("tmp.txt","reservation.txt");
 int tableau_resvol_disponible(char tab[50][10])
 {
 	int i,nS=0;
-	FILE* f=fopen("reservation.txt","r");
+	FILE* f=fopen("reservervol.txt","r");
 	Volr r;
 	
 	if(f!=NULL)
@@ -248,4 +250,70 @@ int tableau_resvol_disponible(char tab[50][10])
 	fclose(f);
 	return nS;
 }
+
+
+
+void affichemontant(char mont[])
+{
+char s1[10],s2[10],s3[10],s4[10],s5[10],s6[10],s7[10],s8[10],s9[10],s10[10],s11[10],s12[10],s13[10];
+FILE* f=fopen("reservervol.txt","r");
+while(fscanf(f,"%s %s %s %s %s %s %s %s %s %s %s %s %s\n",s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13)!=EOF)
+{
+strcpy(mont,s13);
+}
+fclose(f);}
+
+
+
+void affichedepartdestination(char depart[],char destin[],char idv[10])
+{
+char s1[10],s2[10],s3[10],s4[10],s5[10],s6[10],s7[10],s8[10],s9[10],s10[10],s11[10],s12[10],s13[10];
+FILE* f1=fopen("reservervol.txt","r");
+FILE* f=fopen("vol.txt","r");
+while(fscanf(f,"%s %s %s %s %s %s %s %s %s %s %s \n",s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13)!=EOF)
+{ 
+if(strcmp(s1,idv)==0)
+{
+strcpy(depart,s2);
+strcpy(destin,s3);
+}
+}
+fclose(f);
+fclose(f1);
+}
+
+void ajouter_reservationvolclient(Volr r)
+{
+FILE*f=NULL;
+FILE*f2=NULL;
+FILE*f1=NULL;
+int dateDEPARTjour,dateDEPARTmois,dateDEPARTannee,dateARIVEEjour,dateARIVEEmois,dateARIVEEannee,prix;
+char id_vol[10],depart[10],destination[10],companie[10],s1[10],idclient[10];
+int montant,b;
+vol v;
+f=fopen("reservervol.txt","a+");
+f2=fopen("vol.txt","r");
+f1=fopen("client.txt","r");
+ 
+b=r.personne;
+
+while(fscanf(f1,"%s\n",s1)!=EOF)
+{
+strcpy(idclient,s1);
+}
+
+while(fscanf(f2,"%s %s %s %s %d %d %d %d %d %d %d\n",id_vol,depart,destination,companie,&dateDEPARTjour,&dateDEPARTmois,&dateDEPARTannee,&dateARIVEEjour,&dateARIVEEmois,&dateARIVEEannee,&prix)!=EOF)
+{ 
+        if(strcmp(id_vol,r.id_vol)==0)
+        {
+             fprintf(f,"%s %s %s %d %d %d %d %d %d %s %s %d %d\n",idclient,r.id_reservation,r.id_vol,r.depart.jour,r.depart.mois,r.depart.annee,r.arrivee.jour,r.arrivee.mois,r.arrivee.annee,depart,destination,r.personne,prix*b);
+  
+          }
+}
+fclose(f);
+
+fclose(f2);
+fclose(f2);
+}
+
 
