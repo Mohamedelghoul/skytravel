@@ -14,7 +14,7 @@ void
 on_retourrecclient_clicked             (GtkWidget       *objet,
                                         gpointer         user_data)
 {
-GtkWidget *treeviewrecclient;
+	GtkWidget *treeviewrecclient;
 	GtkWidget *reclamationclient,*tabrecclient;
 	reclamationclient=lookup_widget(objet,"reclamationclient");
 	gtk_widget_destroy(reclamationclient);
@@ -51,7 +51,7 @@ on_sauvegarderrecclient_clicked        (GtkWidget       *objet,
 	strcpy(r.id_client,a);
 	rechtypederecclient=lookup_widget(objet,"rechtypederecclient");
 	strcpy(r.type,gtk_combo_box_get_active_text(GTK_COMBO_BOX(rechtypederecclient)));
-	r.date.jour=12;
+	r.date.jour=16;
 	r.date.mois=12;
 	r.date.annee=2019;
 	strcpy(r.etat,"non_lu");
@@ -73,10 +73,49 @@ on_sauvegarderrecclient_clicked        (GtkWidget       *objet,
 
 
 void
-on_archiverrecclient_clicked           (GtkButton       *button,
+on_archiverrecclient_clicked           (GtkWidget       *objet,
                                         gpointer         user_data)
 {
+	GtkWidget *confirmationarchiverrec;
+	GtkWidget *reclamationclient;
+	GtkWidget *rechtypederecclient;
+	GtkWidget *saisierecclient;
 
+	reclamation r;
+	char a[20];
+	FILE* f=NULL;
+
+	r.id_rec=calculer_reclamation();
+	f=fopen("actual_user.txt","a+");
+	if(f!=NULL)
+	{	
+		while(!feof(f))
+		{
+			fscanf(f,"%s \n",a);
+		}
+	}
+	fclose(f);
+	strcpy(r.id_client,a);
+	rechtypederecclient=lookup_widget(objet,"rechtypederecclient");
+	strcpy(r.type,gtk_combo_box_get_active_text(GTK_COMBO_BOX(rechtypederecclient)));
+	r.date.jour=16;
+	r.date.mois=12;
+	r.date.annee=2019;
+	strcpy(r.etat,"non_envoyee");
+	sprintf(r.text,"t%d.txt",r.id_rec);
+	sprintf(r.reponse,"r%d.txt",r.id_rec);
+
+	saisierecclient=lookup_widget(objet,"saisierecclient");
+	set_text_file(r.text,gtk_entry_get_text(GTK_ENTRY(saisierecclient)));
+
+	ajouter_reclamation(r);
+
+	reclamationclient=lookup_widget(objet,"reclamationclient");
+	confirmationarchiverrec=lookup_widget(objet,"confirmationarchiverrec");
+
+	confirmationarchiverrec=create_confirmationarchiverrec();
+	gtk_widget_show(confirmationarchiverrec);
+	gtk_widget_destroy(reclamationclient);
 }
 
 
@@ -185,7 +224,7 @@ GtkWidget *idsupprecclient;
 
 
 	idsupprecclient=lookup_widget(suppressionderecclient,"idsupprecclient");
-	n=remplir_combo_reclamation(tab);
+	n=remplir_combo_reclamation_client(tab);
 	for(i=0;i<n;i++)
 	{
 		gtk_combo_box_append_text (GTK_COMBO_BOX (idsupprecclient),_(tab[i]));
@@ -222,7 +261,7 @@ on_modiferrecclient_clicked            (GtkWidget       *objet,
 
 
 	modifiercomborec=lookup_widget(selectmodfierreclamation,"modifiercomborec");
-	n=remplir_combo_reclamation(tab);
+	n=remplir_combo_reclamation_client(tab);
 	for(i=0;i<n;i++)
 	{
 		gtk_combo_box_append_text (GTK_COMBO_BOX (modifiercomborec),_(tab[i]));
@@ -249,7 +288,7 @@ char tab[50][50];
 
 
 	affichercomboreclamation=lookup_widget(selctionnerafficherreclamation,"affichercomboreclamation");
-	n=remplir_combo_reclamation(tab);
+	n=remplir_combo_reclamation_admin(tab);
 	for(i=0;i<n;i++)
 	{
 		gtk_combo_box_append_text (GTK_COMBO_BOX (affichercomboreclamation),_(tab[i]));
@@ -289,7 +328,7 @@ char tab[50][50];
 
 
 	idsupprecadmin=lookup_widget(suppressionderecadmin,"idsupprecadmin");
-	n=remplir_combo_reclamation(tab);
+	n=remplir_combo_reclamation_admin(tab);
 	for(i=0;i<n;i++)
 	{
 		gtk_combo_box_append_text (GTK_COMBO_BOX (idsupprecadmin),_(tab[i]));
@@ -412,36 +451,85 @@ on_sauvegardermodifierrec_clicked      (GtkWidget       *objet,
 	GtkWidget sauvegardermodifierrec;
 	GtkWidget *dejasaisierec;
 	GtkWidget *dejatypederecherche;
-	FtkWidget *labelidrecmodifier;
+	GtkWidget *labelidrecmodifier;
+	GtkWidget *modifierreclamationclient;
+	GtkWidget *msgconfimationrec;
 
 	reclamation r;
+	reclamation R;
 	char a[20];
 	FILE* f=NULL;
 	char idreclamation[20];
 
+	modifierreclamationclient=lookup_widget(objet,"modifierreclamationclient");
 	labelidrecmodifier=lookup_widget(modifierreclamationclient,"labelidrecmodifier");
 	strcpy(idreclamation,gtk_label_get_text(GTK_LABEL(labelidrecmodifier)));
 
 	f=fopen("reclamation.txt","a+");
 	if(f!=NULL)
 	{	
-		while(fscanf(f,"%s",a)
+		while(fscanf(f,"%d %s %s %d %d %d %s %s %s \n",&R.id_rec,R.id_client,R.type,&R.date.jour,&R.date.mois,&R.date.annee,R.etat,R.text,R.reponse)!=EOF)
 		{
-			if(stcmp(a,idreclamation)==0)
+			if(strcmp(a,idreclamation)==0)
 				fscanf(f,"%d %s %s %d %d %d %s %s %s \n",&r.id_rec,r.id_client,r.type,&r.date.jour,&r.date.mois,&r.date.annee,r.etat,r.text,r.reponse);
 		}
-	}
 	fclose(f);
+	}
+	dejasaisierec=lookup_widget(objet,"dejasaisierec");
+	sprintf(r.text,"t%s.txt",idreclamation);
+	set_text_file(r.text,gtk_entry_get_text(GTK_ENTRY(dejasaisierec)));
 
-
+	msgconfimationrec=lookup_widget(objet,"msgconfimationrec");
+	gtk_widget_destroy(modifierreclamationclient);
+	msgconfimationrec=create_msgconfimationrec();
+	gtk_widget_show(msgconfimationrec);
 }
 
 
 void
-on_archivermodifierrec_clicked         (GtkButton       *button,
+on_archivermodifierrec_clicked         (GtkWidget       *objet,
                                         gpointer         user_data)
 {
+	GtkWidget *confirmationarchiverrec;
+	GtkWidget *modifierreclamationclient;
+	GtkWidget *dejatypederecherche;
+	GtkWidget *dejasaisierec;
 
+	reclamation r;
+	char a[20];
+	FILE* f=NULL;
+
+	r.id_rec=calculer_reclamation();
+	f=fopen("actual_user.txt","a+");
+	if(f!=NULL)
+	{	
+		while(!feof(f))
+		{
+			fscanf(f,"%s \n",a);
+		}
+	}
+	fclose(f);
+	strcpy(r.id_client,a);
+	dejatypederecherche=lookup_widget(objet,"dejatypederecherche");
+	strcpy(r.type,gtk_combo_box_get_active_text(GTK_COMBO_BOX(dejatypederecherche)));
+	r.date.jour=16;
+	r.date.mois=12;
+	r.date.annee=2019;
+	strcpy(r.etat,"non_envoyee");
+	sprintf(r.text,"t%d.txt",r.id_rec);
+	sprintf(r.reponse,"r%d.txt",r.id_rec);
+
+	dejasaisierec=lookup_widget(objet,"dejasaisierec");
+	set_text_file(r.text,gtk_entry_get_text(GTK_ENTRY(dejasaisierec)));
+
+	ajouter_reclamation(r);
+
+	modifierreclamationclient=lookup_widget(objet,"modifierreclamationclient");
+	confirmationarchiverrec=lookup_widget(objet,"confirmationarchiverrec");
+
+	confirmationarchiverrec=create_confirmationarchiverrec();
+	gtk_widget_show(confirmationarchiverrec);
+	gtk_widget_destroy(modifierreclamationclient);
 }
 
 
@@ -468,6 +556,7 @@ on_afficherrecaffichage_clicked        (GtkWidget       *objet,
 	FILE* f1=NULL;
 	FILE *f=NULL;
 	reclamation r;
+	reclamation r1;
 
 	affichercomboreclamation=lookup_widget(objet,"affichercomboreclamation");
 	strcpy(idreclamation,gtk_combo_box_get_active_text(GTK_COMBO_BOX(affichercomboreclamation)));
@@ -494,6 +583,15 @@ on_afficherrecaffichage_clicked        (GtkWidget       *objet,
 		while(fscanf(f,"%d %s %s %d %d %d %s %s %s \n",&r.id_rec,r.id_client,r.type,&r.date.jour,&r.date.mois,&r.date.annee,r.etat,r.text,r.reponse)!=EOF)
 			if(r.id_rec==idrec)
 			{
+				r1.id_rec=r.id_rec;
+				strcpy(r1.id_client,r.id_client);
+				strcpy(r1.type,r.type);
+				r1.date.jour=r.date.jour;
+				r1.date.mois=r.date.mois;
+				r1.date.annee=r.date.annee;
+				strcpy(r1.etat,"lu");
+				strcpy(r1.text,r.text);
+				strcpy(r1.reponse,r.reponse);
 				gtk_label_set_text(GTK_LABEL(idclient),r.id_client);
 				sprintf(date,"%d/%d/%d",r.date.jour,r.date.mois,r.date.annee);
 				gtk_label_set_text(GTK_LABEL(jj_mm_aa),date);
@@ -501,7 +599,7 @@ on_afficherrecaffichage_clicked        (GtkWidget       *objet,
 
 				strcpy(text,"\0");
 
-				f1=fopen(r.text,"r");
+				f1=fopen(r.text,"a+");
 				while(!feof(f1))
 				{
 					fscanf(f1,"%s ",a);
@@ -527,6 +625,28 @@ on_afficherrecaffichage_clicked        (GtkWidget       *objet,
 				gtk_entry_set_text(GTK_ENTRY(saisiereponsereclamation),text);
 			}	
 	fclose(f);
+	reclamation R;
+	FILE *fichierIN=NULL;
+	FILE *fichierOUT=NULL;
+	if((fichierIN=fopen("reclamation.txt","r"))==NULL)
+	printf("erreur ouverture fichier lecture supprimer\n");
+	if((fichierOUT=fopen("reclamation_copie.txt","w"))==NULL)
+	{
+	fclose(fichierIN);
+	printf("erreur ouverture fichier ecriture supprimer\n");
+	}
+	while(fscanf(fichierIN,"%d %s %s %d %d %d %s %s %s \n",&R.id_rec,R.id_client,R.type,&R.date.jour,&R.date.mois,&R.date.annee,R.etat,R.text,R.reponse)!=EOF)
+	{
+	if (idrec!=R.id_rec)
+	{
+	fprintf(fichierOUT,"%d %s %s %d %d %d %s %s %s \n",R.id_rec,R.id_client,R.type,R.date.jour,R.date.mois,R.date.annee,R.etat,R.text,R.reponse);
+	}}
+	fclose(fichierIN);
+	fclose(fichierOUT);
+	remove("reclamation.txt");
+	rename("reclamation_copie.txt","reclamation.txt");
+	ajouter_reclamation(r1);
+	
 }
 
 
@@ -681,9 +801,16 @@ on_buttonoksupprimerrec_clicked        (GtkWidget       *objet,
 
 
 void
-on_okarchiverrec_clicked               (GtkButton       *button,
+on_okarchiverrec_clicked               (GtkWidget       *objet,
                                         gpointer         user_data)
 {
-
+	GtkWidget *treeviewrecclient;
+	GtkWidget *confirmationarchiverrec,*tabrecclient;
+	confirmationarchiverrec=lookup_widget(objet,"confirmationarchiverrec");
+	gtk_widget_destroy(confirmationarchiverrec);
+	tabrecclient=create_tabrecclient();
+	gtk_widget_show(tabrecclient);
+	treeviewrecclient=lookup_widget(tabrecclient,"treeviewrecclient");
+  	afficher_reclamation_client(treeviewrecclient);
 }
 

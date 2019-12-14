@@ -38,7 +38,10 @@ create_reclamationclient (void)
   GtkWidget *rechtypederecclient;
 
   reclamationclient = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (reclamationclient), _("window1"));
+  gtk_widget_set_size_request (reclamationclient, 500, 320);
+  gtk_window_set_title (GTK_WINDOW (reclamationclient), _("Ecrire Reclamation"));
+  gtk_window_set_position (GTK_WINDOW (reclamationclient), GTK_WIN_POS_CENTER);
+  gtk_window_set_resizable (GTK_WINDOW (reclamationclient), FALSE);
 
   fixed1 = gtk_fixed_new ();
   gtk_widget_show (fixed1);
@@ -105,7 +108,10 @@ create_msgconfimationrec (void)
   GtkWidget *okmsgrec;
 
   msgconfimationrec = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (msgconfimationrec), _("window2"));
+  gtk_widget_set_size_request (msgconfimationrec, 330, 130);
+  gtk_window_set_title (GTK_WINDOW (msgconfimationrec), _("CONFIRMATION"));
+  gtk_window_set_position (GTK_WINDOW (msgconfimationrec), GTK_WIN_POS_CENTER);
+  gtk_window_set_resizable (GTK_WINDOW (msgconfimationrec), FALSE);
 
   fixed2 = gtk_fixed_new ();
   gtk_widget_show (fixed2);
@@ -113,12 +119,12 @@ create_msgconfimationrec (void)
 
   msgdeconfirmation = gtk_label_new (_("Votre reclamation a et\303\251 bien envoy\303\251"));
   gtk_widget_show (msgdeconfirmation);
-  gtk_fixed_put (GTK_FIXED (fixed2), msgdeconfirmation, 16, 48);
+  gtk_fixed_put (GTK_FIXED (fixed2), msgdeconfirmation, 16, 0);
   gtk_widget_set_size_request (msgdeconfirmation, 296, 97);
 
   okmsgrec = gtk_button_new_with_mnemonic (_("ok"));
   gtk_widget_show (okmsgrec);
-  gtk_fixed_put (GTK_FIXED (fixed2), okmsgrec, 224, 120);
+  gtk_fixed_put (GTK_FIXED (fixed2), okmsgrec, 224, 80);
   gtk_widget_set_size_request (okmsgrec, 66, 29);
 
   g_signal_connect ((gpointer) okmsgrec, "clicked",
@@ -149,7 +155,10 @@ create_reponsereclamation (void)
   GtkWidget *retouradmin;
 
   reponsereclamation = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (reponsereclamation), _("window3"));
+  gtk_widget_set_size_request (reponsereclamation, 500, 450);
+  gtk_window_set_title (GTK_WINDOW (reponsereclamation), _("Reponse Reclamation"));
+  gtk_window_set_position (GTK_WINDOW (reponsereclamation), GTK_WIN_POS_CENTER);
+  gtk_window_set_resizable (GTK_WINDOW (reponsereclamation), FALSE);
 
   fixed3 = gtk_fixed_new ();
   gtk_widget_show (fixed3);
@@ -243,7 +252,7 @@ create_tabrecclient (void)
   treeviewrecclient = gtk_tree_view_new ();
   gtk_widget_show (treeviewrecclient);
   gtk_fixed_put (GTK_FIXED (fixed4), treeviewrecclient, 32, 40);
-  gtk_widget_set_size_request (treeviewrecclient, 384, 192);
+  gtk_widget_set_size_request (treeviewrecclient, 512, 192);
 
   ajouterrecclient = gtk_button_new_with_mnemonic (_("Ajouter"));
   gtk_widget_show (ajouterrecclient);
@@ -312,7 +321,7 @@ create_tabrecadmin (void)
   treeview2recadmin = gtk_tree_view_new ();
   gtk_widget_show (treeview2recadmin);
   gtk_fixed_put (GTK_FIXED (fixed5), treeview2recadmin, 24, 56);
-  gtk_widget_set_size_request (treeview2recadmin, 384, 192);
+  gtk_widget_set_size_request (treeview2recadmin, 568, 192);
 
   rechercheclient = gtk_combo_box_new_text ();
   gtk_widget_show (rechercheclient);
@@ -374,7 +383,10 @@ create_suppressionderecadmin (void)
   GtkWidget *retoursupprecadmin;
 
   suppressionderecadmin = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (suppressionderecadmin), _("window1"));
+  gtk_widget_set_size_request (suppressionderecadmin, 330, 200);
+  gtk_window_set_title (GTK_WINDOW (suppressionderecadmin), _("Supprimer Reclamation"));
+  gtk_window_set_position (GTK_WINDOW (suppressionderecadmin), GTK_WIN_POS_CENTER);
+  gtk_window_set_resizable (GTK_WINDOW (suppressionderecadmin), FALSE);
 
   fixed6 = gtk_fixed_new ();
   gtk_widget_show (fixed6);
@@ -422,7 +434,10 @@ create_suppressionderecclient (void)
   GtkWidget *retoursupprecclient;
 
   suppressionderecclient = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (suppressionderecclient), _("window2"));
+  gtk_widget_set_size_request (suppressionderecclient, 350, 200);
+  gtk_window_set_title (GTK_WINDOW (suppressionderecclient), _("Supprimer Reclamation"));
+  gtk_window_set_position (GTK_WINDOW (suppressionderecclient), GTK_WIN_POS_CENTER);
+  gtk_window_set_resizable (GTK_WINDOW (suppressionderecclient), FALSE);
 
   fixed7 = gtk_fixed_new ();
   gtk_widget_show (fixed7);
@@ -465,25 +480,28 @@ create_messageconfirmationsupp (void)
 {
   GtkWidget *messageconfirmationsupp;
   GtkWidget *fixed8;
-  GtkWidget *okmsgrecsupp;
   GtkWidget *msgderecsupprimer;
+  GtkWidget *okmsgrecsupp;
 
   messageconfirmationsupp = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (messageconfirmationsupp), _("window4"));
+  gtk_widget_set_size_request (messageconfirmationsupp, 330, 130);
+  gtk_window_set_title (GTK_WINDOW (messageconfirmationsupp), _("CONFIRMATION"));
+  gtk_window_set_position (GTK_WINDOW (messageconfirmationsupp), GTK_WIN_POS_CENTER);
+  gtk_window_set_resizable (GTK_WINDOW (messageconfirmationsupp), FALSE);
 
   fixed8 = gtk_fixed_new ();
   gtk_widget_show (fixed8);
   gtk_container_add (GTK_CONTAINER (messageconfirmationsupp), fixed8);
 
-  okmsgrecsupp = gtk_button_new_with_mnemonic (_("Ok"));
-  gtk_widget_show (okmsgrecsupp);
-  gtk_fixed_put (GTK_FIXED (fixed8), okmsgrecsupp, 280, 160);
-  gtk_widget_set_size_request (okmsgrecsupp, 66, 29);
-
   msgderecsupprimer = gtk_label_new (_("La reclamation a et\303\251 supprimer"));
   gtk_widget_show (msgderecsupprimer);
-  gtk_fixed_put (GTK_FIXED (fixed8), msgderecsupprimer, 32, 80);
-  gtk_widget_set_size_request (msgderecsupprimer, 320, 120);
+  gtk_fixed_put (GTK_FIXED (fixed8), msgderecsupprimer, 16, 0);
+  gtk_widget_set_size_request (msgderecsupprimer, 320, 88);
+
+  okmsgrecsupp = gtk_button_new_with_mnemonic (_("Ok"));
+  gtk_widget_show (okmsgrecsupp);
+  gtk_fixed_put (GTK_FIXED (fixed8), okmsgrecsupp, 248, 80);
+  gtk_widget_set_size_request (okmsgrecsupp, 66, 29);
 
   g_signal_connect ((gpointer) okmsgrecsupp, "clicked",
                     G_CALLBACK (on_okmsgrecsupp_clicked),
@@ -492,8 +510,8 @@ create_messageconfirmationsupp (void)
   /* Store pointers to all widgets, for use by lookup_widget(). */
   GLADE_HOOKUP_OBJECT_NO_REF (messageconfirmationsupp, messageconfirmationsupp, "messageconfirmationsupp");
   GLADE_HOOKUP_OBJECT (messageconfirmationsupp, fixed8, "fixed8");
-  GLADE_HOOKUP_OBJECT (messageconfirmationsupp, okmsgrecsupp, "okmsgrecsupp");
   GLADE_HOOKUP_OBJECT (messageconfirmationsupp, msgderecsupprimer, "msgderecsupprimer");
+  GLADE_HOOKUP_OBJECT (messageconfirmationsupp, okmsgrecsupp, "okmsgrecsupp");
 
   return messageconfirmationsupp;
 }
@@ -508,9 +526,13 @@ create_modifierreclamationclient (void)
   GtkWidget *sauvegardermodifierrec;
   GtkWidget *archivermodifierrec;
   GtkWidget *retourmodifierrec;
+  GtkWidget *labelidrecmodifier;
 
   modifierreclamationclient = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (modifierreclamationclient), _("window1"));
+  gtk_widget_set_size_request (modifierreclamationclient, 500, 320);
+  gtk_window_set_title (GTK_WINDOW (modifierreclamationclient), _("Modifier Reclamation"));
+  gtk_window_set_position (GTK_WINDOW (modifierreclamationclient), GTK_WIN_POS_CENTER);
+  gtk_window_set_resizable (GTK_WINDOW (modifierreclamationclient), FALSE);
 
   fixed9 = gtk_fixed_new ();
   gtk_widget_show (fixed9);
@@ -518,7 +540,7 @@ create_modifierreclamationclient (void)
 
   dejasaisierec = gtk_entry_new ();
   gtk_widget_show (dejasaisierec);
-  gtk_fixed_put (GTK_FIXED (fixed9), dejasaisierec, 16, 160);
+  gtk_fixed_put (GTK_FIXED (fixed9), dejasaisierec, 24, 152);
   gtk_widget_set_size_request (dejasaisierec, 440, 104);
   gtk_entry_set_invisible_char (GTK_ENTRY (dejasaisierec), 8226);
 
@@ -546,6 +568,11 @@ create_modifierreclamationclient (void)
   gtk_fixed_put (GTK_FIXED (fixed9), retourmodifierrec, 32, 280);
   gtk_widget_set_size_request (retourmodifierrec, 66, 29);
 
+  labelidrecmodifier = gtk_label_new ("");
+  gtk_widget_show (labelidrecmodifier);
+  gtk_fixed_put (GTK_FIXED (fixed9), labelidrecmodifier, 48, 56);
+  gtk_widget_set_size_request (labelidrecmodifier, 120, 24);
+
   g_signal_connect ((gpointer) sauvegardermodifierrec, "clicked",
                     G_CALLBACK (on_sauvegardermodifierrec_clicked),
                     NULL);
@@ -564,6 +591,7 @@ create_modifierreclamationclient (void)
   GLADE_HOOKUP_OBJECT (modifierreclamationclient, sauvegardermodifierrec, "sauvegardermodifierrec");
   GLADE_HOOKUP_OBJECT (modifierreclamationclient, archivermodifierrec, "archivermodifierrec");
   GLADE_HOOKUP_OBJECT (modifierreclamationclient, retourmodifierrec, "retourmodifierrec");
+  GLADE_HOOKUP_OBJECT (modifierreclamationclient, labelidrecmodifier, "labelidrecmodifier");
 
   return modifierreclamationclient;
 }
@@ -578,7 +606,10 @@ create_selctionnerafficherreclamation (void)
   GtkWidget *retouridaffichagerecadmin;
 
   selctionnerafficherreclamation = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (selctionnerafficherreclamation), _("window1"));
+  gtk_widget_set_size_request (selctionnerafficherreclamation, 330, 200);
+  gtk_window_set_title (GTK_WINDOW (selctionnerafficherreclamation), _("Afficher Reclamation"));
+  gtk_window_set_position (GTK_WINDOW (selctionnerafficherreclamation), GTK_WIN_POS_CENTER);
+  gtk_window_set_resizable (GTK_WINDOW (selctionnerafficherreclamation), FALSE);
 
   fixed10 = gtk_fixed_new ();
   gtk_widget_show (fixed10);
@@ -627,7 +658,10 @@ create_selectmodfierreclamation (void)
   GtkWidget *retourmodfierreclamation;
 
   selectmodfierreclamation = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (selectmodfierreclamation), _("window1"));
+  gtk_widget_set_size_request (selectmodfierreclamation, 330, 200);
+  gtk_window_set_title (GTK_WINDOW (selectmodfierreclamation), _("Modifier Reclamation"));
+  gtk_window_set_position (GTK_WINDOW (selectmodfierreclamation), GTK_WIN_POS_CENTER);
+  gtk_window_set_resizable (GTK_WINDOW (selectmodfierreclamation), FALSE);
 
   fixed11 = gtk_fixed_new ();
   gtk_widget_show (fixed11);
@@ -640,7 +674,7 @@ create_selectmodfierreclamation (void)
 
   modfierreclamationchoisi = gtk_button_new_with_mnemonic (_("Modifier"));
   gtk_widget_show (modfierreclamationchoisi);
-  gtk_fixed_put (GTK_FIXED (fixed11), modfierreclamationchoisi, 256, 152);
+  gtk_fixed_put (GTK_FIXED (fixed11), modfierreclamationchoisi, 232, 152);
   gtk_widget_set_size_request (modfierreclamationchoisi, 66, 29);
 
   retourmodfierreclamation = gtk_button_new_with_mnemonic (_("Retour"));
@@ -705,8 +739,10 @@ create_msgreponserec (void)
   GtkWidget *okreponseenvoyee;
 
   msgreponserec = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_widget_set_size_request (msgreponserec, 330, 130);
   gtk_window_set_title (GTK_WINDOW (msgreponserec), _("CONFIRMATION"));
   gtk_window_set_position (GTK_WINDOW (msgreponserec), GTK_WIN_POS_CENTER);
+  gtk_window_set_resizable (GTK_WINDOW (msgreponserec), FALSE);
 
   fixed13 = gtk_fixed_new ();
   gtk_widget_show (fixed13);
@@ -714,12 +750,12 @@ create_msgreponserec (void)
 
   label1 = gtk_label_new (_("Votre reponse a et\303\251 bien envoy\303\251"));
   gtk_widget_show (label1);
-  gtk_fixed_put (GTK_FIXED (fixed13), label1, 16, 48);
+  gtk_fixed_put (GTK_FIXED (fixed13), label1, 24, 0);
   gtk_widget_set_size_request (label1, 296, 97);
 
   okreponseenvoyee = gtk_button_new_with_mnemonic (_("ok"));
   gtk_widget_show (okreponseenvoyee);
-  gtk_fixed_put (GTK_FIXED (fixed13), okreponseenvoyee, 224, 120);
+  gtk_fixed_put (GTK_FIXED (fixed13), okreponseenvoyee, 240, 80);
   gtk_widget_set_size_request (okreponseenvoyee, 66, 29);
 
   g_signal_connect ((gpointer) okreponseenvoyee, "clicked",
@@ -740,25 +776,27 @@ create_confirmationsupprimerrec (void)
 {
   GtkWidget *confirmationsupprimerrec;
   GtkWidget *fixed14;
-  GtkWidget *buttonoksupprimerrec;
   GtkWidget *label2;
+  GtkWidget *buttonoksupprimerrec;
 
   confirmationsupprimerrec = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_widget_set_size_request (confirmationsupprimerrec, 330, 130);
   gtk_window_set_title (GTK_WINDOW (confirmationsupprimerrec), _("CONFIRMATION"));
+  gtk_window_set_resizable (GTK_WINDOW (confirmationsupprimerrec), FALSE);
 
   fixed14 = gtk_fixed_new ();
   gtk_widget_show (fixed14);
   gtk_container_add (GTK_CONTAINER (confirmationsupprimerrec), fixed14);
 
-  buttonoksupprimerrec = gtk_button_new_with_mnemonic (_("Ok"));
-  gtk_widget_show (buttonoksupprimerrec);
-  gtk_fixed_put (GTK_FIXED (fixed14), buttonoksupprimerrec, 280, 96);
-  gtk_widget_set_size_request (buttonoksupprimerrec, 66, 29);
-
   label2 = gtk_label_new (_("La reclamation a et\303\251 supprimer"));
   gtk_widget_show (label2);
-  gtk_fixed_put (GTK_FIXED (fixed14), label2, 32, 8);
+  gtk_fixed_put (GTK_FIXED (fixed14), label2, 8, 0);
   gtk_widget_set_size_request (label2, 320, 120);
+
+  buttonoksupprimerrec = gtk_button_new_with_mnemonic (_("Ok"));
+  gtk_widget_show (buttonoksupprimerrec);
+  gtk_fixed_put (GTK_FIXED (fixed14), buttonoksupprimerrec, 248, 88);
+  gtk_widget_set_size_request (buttonoksupprimerrec, 66, 29);
 
   g_signal_connect ((gpointer) buttonoksupprimerrec, "clicked",
                     G_CALLBACK (on_buttonoksupprimerrec_clicked),
@@ -767,8 +805,8 @@ create_confirmationsupprimerrec (void)
   /* Store pointers to all widgets, for use by lookup_widget(). */
   GLADE_HOOKUP_OBJECT_NO_REF (confirmationsupprimerrec, confirmationsupprimerrec, "confirmationsupprimerrec");
   GLADE_HOOKUP_OBJECT (confirmationsupprimerrec, fixed14, "fixed14");
-  GLADE_HOOKUP_OBJECT (confirmationsupprimerrec, buttonoksupprimerrec, "buttonoksupprimerrec");
   GLADE_HOOKUP_OBJECT (confirmationsupprimerrec, label2, "label2");
+  GLADE_HOOKUP_OBJECT (confirmationsupprimerrec, buttonoksupprimerrec, "buttonoksupprimerrec");
 
   return confirmationsupprimerrec;
 }
@@ -782,8 +820,10 @@ create_confirmationarchiverrec (void)
   GtkWidget *okarchiverrec;
 
   confirmationarchiverrec = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  gtk_widget_set_size_request (confirmationarchiverrec, 330, 130);
   gtk_window_set_title (GTK_WINDOW (confirmationarchiverrec), _("CONFIRMATION"));
   gtk_window_set_position (GTK_WINDOW (confirmationarchiverrec), GTK_WIN_POS_CENTER);
+  gtk_window_set_resizable (GTK_WINDOW (confirmationarchiverrec), FALSE);
 
   fixed15 = gtk_fixed_new ();
   gtk_widget_show (fixed15);
@@ -791,12 +831,12 @@ create_confirmationarchiverrec (void)
 
   label3 = gtk_label_new (_("La reclamation a et\303\251 archive\303\251"));
   gtk_widget_show (label3);
-  gtk_fixed_put (GTK_FIXED (fixed15), label3, 32, 8);
+  gtk_fixed_put (GTK_FIXED (fixed15), label3, 0, 0);
   gtk_widget_set_size_request (label3, 320, 120);
 
   okarchiverrec = gtk_button_new_with_mnemonic (_("Ok"));
   gtk_widget_show (okarchiverrec);
-  gtk_fixed_put (GTK_FIXED (fixed15), okarchiverrec, 280, 96);
+  gtk_fixed_put (GTK_FIXED (fixed15), okarchiverrec, 248, 80);
   gtk_widget_set_size_request (okarchiverrec, 66, 29);
 
   g_signal_connect ((gpointer) okarchiverrec, "clicked",

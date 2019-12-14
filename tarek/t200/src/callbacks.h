@@ -10,7 +10,7 @@ on_sauvegarderrecclient_clicked        (GtkWidget       *objet,
                                         gpointer         user_data);
 
 void
-on_archiverrecclient_clicked           (GtkButton       *button,
+on_archiverrecclient_clicked           (GtkWidget       *objet,
                                         gpointer         user_data);
 
 void
@@ -82,7 +82,7 @@ on_sauvegardermodifierrec_clicked      (GtkWidget       *objet,
                                         gpointer         user_data);
 
 void
-on_archivermodifierrec_clicked         (GtkButton       *button,
+on_archivermodifierrec_clicked         (GtkWidget       *objet,
                                         gpointer         user_data);
 
 void
@@ -114,5 +114,5 @@ on_buttonoksupprimerrec_clicked        (GtkWidget       *objet,
                                         gpointer         user_data);
 
 void
-on_okarchiverrec_clicked               (GtkButton       *button,
+on_okarchiverrec_clicked               (GtkWidget       *objet,
                                         gpointer         user_data);

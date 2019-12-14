@@ -18,7 +18,7 @@ int id_rec;
 char id_client[50];
 char type[20];
 date date;
-char etat[10];
+char etat[20];
 char text[1000];
 char reponse[1000];
 }reclamation;
